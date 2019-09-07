@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using DesktopExtension.SavePosition;
+using DesktopExtension.Utils;
 
 namespace DesktopExtension
 {
@@ -25,8 +26,9 @@ namespace DesktopExtension
             var collector = new PositionWindowsByProcessCollector();
 
             var excludedProcesses = LoadExcludedProcesses();
+            var bus = new NotificationBus();
 
-            _backupAndRestorePosition = new BackupAndRestorePosition(systemEvents, collector, new PostionRestoreOperator(),
+            _backupAndRestorePosition = new BackupAndRestorePosition(systemEvents, collector, new PostionRestoreOperator(bus),
                 excludedProcesses);
         }
 

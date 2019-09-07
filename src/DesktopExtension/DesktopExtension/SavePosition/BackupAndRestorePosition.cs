@@ -16,7 +16,7 @@ namespace DesktopExtension.SavePosition
             _collector = collector;
 
             var options = new PositionWindowsByProcessCollectorOptions(
-                window => string.IsNullOrWhiteSpace(window.Title) || window.Reactangle.IsEmpty || window.Reactangle.IsOffScreen(),
+                window => string.IsNullOrWhiteSpace(window.Title) || window.Rectangle.IsEmpty || window.Rectangle.IsOffScreen(),
                 process => excludedProcesses.Any(n => process.ProcessName.Contains(n))
             );
             _subscription = events

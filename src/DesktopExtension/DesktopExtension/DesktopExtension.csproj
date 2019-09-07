@@ -95,6 +95,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IMainViewModel.cs" />
+    <Compile Include="Interop\WindowRectangle.cs" />
     <Compile Include="SavePosition\BackupAndRestorePosition.cs" />
     <Compile Include="SavePosition\BackupEventTypeCreator.cs" />
     <Compile Include="SavePosition\PositionedWindow.cs" />
@@ -106,6 +107,11 @@
     <Compile Include="Testing\TestingView.xaml.cs">
       <DependentUpon>TestingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ANotification.cs" />
+    <Compile Include="Utils\INotification.cs" />
+    <Compile Include="Utils\INotificationBus.cs" />
+    <Compile Include="Utils\NotificationBus.cs" />
+    <Compile Include="Utils\NotificationType.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows;
 
 namespace DesktopExtension.Interop
 {
@@ -14,7 +13,7 @@ namespace DesktopExtension.Interop
         public static void SwitchToStandby() => SetSuspendState(false, true, true);
     }
 
-    internal class User32
+    internal partial class User32
     {
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool LockWorkStation();
@@ -138,46 +137,6 @@ namespace DesktopExtension.Interop
                 return new WindowRectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
             }
             throw new Exception("unable to retrieve rect");
-        }
-
-        public class WindowRectangle
-        {
-            public int Left { get; }
-            public int Top { get; }
-            public int Right { get; }
-            public int Bottom { get; }
-
-            public WindowRectangle(int left, int top, int right, int bottom)
-            {
-                Left = left;
-                Top = top;
-                Right = right;
-                Bottom = bottom;
-            }
-
-            public override string ToString()
-            {
-                return
-                    $"{nameof(Left)}: {Left}, {nameof(Top)}: {Top}, {nameof(Right)}: {Right}, {nameof(Bottom)}: {Bottom}";
-            }
-
-            public void Deconstruct(out int left, out int top, out int right, out int bottom)
-            {
-                left = Left;
-                top = Top;
-                right = Right;
-                bottom = Bottom;
-            }
-
-            public bool IsEmpty => Left == Right || Bottom == Top;
-
-            public bool IsOffScreen()
-            {
-                var width = SystemParameters.VirtualScreenWidth;
-                var height = SystemParameters.VirtualScreenHeight;
-
-                return Left > width || Right < 0 || Top > height || Bottom < 0;
-            }
         }
     }
 }

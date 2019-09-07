@@ -5,13 +5,13 @@ namespace DesktopExtension.SavePosition
 {
     internal class PositionedWindow
     {
-        public User32.WindowRectangle Reactangle { get; }
+        public WindowRectangle Rectangle { get; }
         public IntPtr WindowHandle { get; }
         public string Title { get; }
 
-        public PositionedWindow(User32.WindowRectangle reactangle, IntPtr windowHandle, string title)
+        public PositionedWindow(WindowRectangle rectangle, IntPtr windowHandle, string title)
         {
-            Reactangle = reactangle;
+            Rectangle = rectangle;
             WindowHandle = windowHandle;
             Title = title;
         }
