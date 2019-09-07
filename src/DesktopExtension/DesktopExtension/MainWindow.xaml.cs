@@ -18,6 +18,7 @@ namespace DesktopExtension
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
 
             var systemEvents = BackupEventTypeCreator.CreateFromSystemEvents();
 
@@ -43,6 +44,8 @@ namespace DesktopExtension
             base.OnClosed(e);
             _backupAndRestorePosition.Dispose();
             _backupAndRestorePosition = null;
+            (DataContext as IDisposable)?.Dispose();
+            DataContext = null;
         }
     }
 }

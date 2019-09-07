@@ -5,8 +5,20 @@ using System.Windows;
 
 namespace DesktopExtension.Interop
 {
+    internal class Powrprof
+    {
+        [DllImport("Powrprof.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        static extern bool SetSuspendState(bool hiberate, bool forceCritical, bool disableWakeEvent);
+
+        public static void SwitchToHibernate() => SetSuspendState(true, true, true);
+        public static void SwitchToStandby() => SetSuspendState(false, true, true);
+    }
+
     internal class User32
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern bool LockWorkStation();
+
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
