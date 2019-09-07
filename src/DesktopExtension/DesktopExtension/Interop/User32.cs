@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 
 namespace DesktopExtension.Interop
 {
@@ -114,7 +115,7 @@ namespace DesktopExtension.Interop
             var height = rectangle.Bottom - rectangle.Top;
 
             SetWindowPos(hWnd, IntPtr.Zero, rectangle.Left, rectangle.Top, width, height,
-                (int)(SetWindowPosFlags.NOZORDER | SetWindowPosFlags.SHOWWINDOW));
+                (int)(SetWindowPosFlags.NOZORDER));
         }
 
         public static WindowRectangle GetWindowRectFrom(IntPtr hwnd)
@@ -157,6 +158,14 @@ namespace DesktopExtension.Interop
             }
 
             public bool IsEmpty => Left == Right || Bottom == Top;
+
+            public bool IsOffScreen()
+            {
+                var width = SystemParameters.VirtualScreenWidth;
+                var height = SystemParameters.VirtualScreenHeight;
+
+                return Left > width || Right < 0 || Top > height || Bottom < 0;
+            }
         }
     }
 }
