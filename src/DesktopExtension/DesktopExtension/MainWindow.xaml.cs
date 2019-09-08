@@ -19,14 +19,15 @@ namespace DesktopExtension
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            var bus = new NotificationBus();
+            DataContext = new MainViewModel(bus);
 
             var systemEvents = BackupEventTypeCreator.CreateFromSystemEvents();
 
             var collector = new PositionWindowsByProcessCollector();
 
             var excludedProcesses = LoadExcludedProcesses();
-            var bus = new NotificationBus();
+            
 
             _backupAndRestorePosition = new BackupAndRestorePosition(systemEvents, collector, new PostionRestoreOperator(bus),
                 excludedProcesses);

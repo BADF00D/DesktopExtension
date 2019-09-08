@@ -15,9 +15,9 @@ namespace DesktopExtension.Log
         public ReactiveCollection<INotification> Notifications { get; }
         public ReactiveProperty<INotification> SelectedNotification { get; }
 
-        public LogViewModel()
+        public LogViewModel(INotificationBus bus)
         {
-            Notifications = new ReactiveCollection<INotification>();
+            Notifications = bus.Notifications.ToReactiveCollection();
             SelectedNotification = new ReactiveProperty<INotification>();
         }
 
@@ -30,7 +30,7 @@ namespace DesktopExtension.Log
 
     class LogDesignViewModel : LogViewModel
     {
-        public LogDesignViewModel()
+        public LogDesignViewModel(): base(new NotificationBus())
         {
             Notifications.AddOnScheduler(new DummyNotification("Some info", NotificationType.Information));
             Notifications.AddOnScheduler(new DummyNotification("Some warning", NotificationType.Warning));

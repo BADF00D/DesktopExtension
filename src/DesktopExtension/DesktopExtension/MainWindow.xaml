@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopExtension"
         xmlns:testing="clr-namespace:DesktopExtension.Testing"
+        xmlns:log="clr-namespace:DesktopExtension.Log"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=True}">
     <TabControl>
         <TabItem Header="Testing">
             <testing:TestingView DataContext="{Binding Testing}" />
+        </TabItem>
+        <TabItem Header="Log">
+            <log:LogView DataContext="{Binding Log}" />
         </TabItem>
     </TabControl>
 </Window>
