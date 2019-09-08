@@ -21,39 +21,6 @@
                     <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Message}" />
                 </GridView>
             </ListView.View>
-            <ListView.ItemTemplate>
-                <DataTemplate DataType="utils:INotification">
-                    <Grid Grid.IsSharedSizeScope="True" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" SharedSizeGroup="Sign" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Type}"
-                                                     Value="{x:Static utils:NotificationType.Warning}">
-                                            <Setter Property="Text" Value="⚠" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Type}"
-                                                     Value="{x:Static utils:NotificationType.Information}">
-                                            <Setter Property="Text" Value="☛" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Type}"
-                                                     Value="{x:Static utils:NotificationType.Error}">
-                                            <Setter Property="Text" Value="♢" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBlock Grid.Column="1" Text="{Binding Timestamp}" />
-                        <TextBlock Grid.Column="2" Text="{Binding Message}" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
         </ListView>
         <GroupBox Grid.Column="1" Header="Details" />
     </Grid>

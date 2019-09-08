@@ -22,7 +22,7 @@ namespace DesktopExtension
             var bus = new NotificationBus();
             DataContext = new MainViewModel(bus);
 
-            var systemEvents = BackupEventTypeCreator.CreateFromSystemEvents();
+            var systemEvents = BackupEventTypeCreator.CreateFromSystemEvents(bus);
 
             var collector = new PositionWindowsByProcessCollector();
 
