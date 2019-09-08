@@ -96,6 +96,11 @@
     </ApplicationDefinition>
     <Compile Include="IMainViewModel.cs" />
     <Compile Include="Interop\WindowRectangle.cs" />
+    <Compile Include="Log\ILogViewModel.cs" />
+    <Compile Include="Log\LogView.xaml.cs">
+      <DependentUpon>LogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Log\NotificationDateTemplateSelector.cs" />
     <Compile Include="SavePosition\BackupAndRestorePosition.cs" />
     <Compile Include="SavePosition\BackupEventTypeCreator.cs" />
     <Compile Include="SavePosition\PositionedWindow.cs" />
@@ -112,6 +117,10 @@
     <Compile Include="Utils\INotificationBus.cs" />
     <Compile Include="Utils\NotificationBus.cs" />
     <Compile Include="Utils\NotificationType.cs" />
+    <Page Include="Log\LogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
