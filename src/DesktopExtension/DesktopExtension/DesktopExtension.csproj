@@ -96,6 +96,7 @@
     </ApplicationDefinition>
     <Compile Include="IMainViewModel.cs" />
     <Compile Include="Interop\WindowRectangle.cs" />
+    <Compile Include="Log\ILogDetailViewModel.cs" />
     <Compile Include="Log\ILogViewModel.cs" />
     <Compile Include="Log\LogView.xaml.cs">
       <DependentUpon>LogView.xaml</DependentUpon>

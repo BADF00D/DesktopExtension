@@ -32,8 +32,8 @@ namespace DesktopExtension.Testing
             HibernateCommand= new ReactiveCommand();
 
             SleepCommand.Do(_ => { Powrprof.SwitchToStandby(); }).Subscribe().AddTo(_subscriptions);
-            HibernateCommand.Do(_ => { Powrprof.SwitchToHibernate(); }).Subscribe().AddTo(_subscriptions);  
-            LockCommand.Do(_ => { User32.LockWorkStation(); }).Subscribe().AddTo(_subscriptions);  
+            HibernateCommand.Do(_ => { Powrprof.SwitchToHibernate(); }).Subscribe().AddTo(_subscriptions);
+            LockCommand.Do(_ => { User32.LockWorkStation(); }).Subscribe().AddTo(_subscriptions);
         }
 
         public void Dispose()

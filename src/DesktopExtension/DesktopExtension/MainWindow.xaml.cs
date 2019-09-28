@@ -24,13 +24,17 @@ namespace DesktopExtension
 
             var systemEvents = BackupEventTypeCreator.CreateFromSystemEvents(bus);
 
+            systemEvents = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMinutes(1))
+                .Select(_ => BackupAndRestorePosition.EventType.Backup)
+                .Merge(systemEvents);
+
             var collector = new PositionWindowsByProcessCollector();
 
             var excludedProcesses = LoadExcludedProcesses();
-            
+
 
             _backupAndRestorePosition = new BackupAndRestorePosition(systemEvents, collector, new PostionRestoreOperator(bus),
-                excludedProcesses);
+                excludedProcesses, bus);
         }
 
         private static IReadOnlyCollection<string> LoadExcludedProcesses()

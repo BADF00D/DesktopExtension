@@ -21,19 +21,40 @@ namespace DesktopExtension.SavePosition
                         {
                             var rect = User32.GetWindowRectFrom(hWnd);
                             var title = User32.GetWindowTitle(hWnd);
+                            var placement = User32.GetWindowPlacement(hWnd);
+                            var isVisiable = User32.IsWindowVisible(hWnd);
 
-                            return new PositionedWindow(rect, hWnd, title);
+                            return new PositionedWindow(rect, hWnd, title, placement, isVisiable);
                         })
                         .Where(w => !options.ExcludeWindow(w))
                         .ToArray();
                     return new PositionWindowsByProcess(p, windows);
                 })
+                .Where(pw => pw.RootWindows.Count > 0)
                 .ToArray();
+        }
+
+        private List<IntPtr> GeRWOPr()
+        {
+            var result = new List<IntPtr>();
+            var listHandle = GCHandle.Alloc(result);
+            try
+            {
+                Callbacks.Win32Callback childProc = EnumWindow;
+                User32.EnumWindows(childProc, GCHandle.ToIntPtr(listHandle));
+            }
+            finally
+            {
+                if (listHandle.IsAllocated)
+                    listHandle.Free();
+            }
+
+            return result;
         }
 
         private List<IntPtr> GetRootWindowsOfProcess(int pid)
         {
-            var rootWindows = GetChildWindows(IntPtr.Zero);
+            var rootWindows = GeRWOPr();
             var dsProcRootWindows = new List<IntPtr>();
             foreach (var hWnd in rootWindows)
             {
